@@ -13,7 +13,8 @@ class Economy(commands.Cog):
         self.bot = bot
         self.profileJson = JsonUsers()
 
-    @commands.command(aliases=["dc", "daily", "claim"])
+    @commands.command(aliases=["daily", "claim"])
+    @commands.cooldown(1, 86400, commands.BucketType.user)  #1 usage per day applied individually by user (commands.BucketType.user)
     async def daily_claim(self, ctx):
         user = ctx.author
         await self.profileJson.verify_user(user)   
